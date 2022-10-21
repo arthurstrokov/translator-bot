@@ -7,3 +7,6 @@ lingvo:
 bot:
   name: EnglishWordTranslatorBot
   token: ${BOT-TOKEN}
+
+server:
+  port: 5000
