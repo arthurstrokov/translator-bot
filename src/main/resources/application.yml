@@ -1,0 +1,9 @@
+lingvo:
+  api:
+    key: ${API-KEY}
+    srcLang: 1033
+    dstLang: 1049
+
+bot:
+  name: EnglishWordTranslatorBot
+  token: ${BOT-TOKEN}
