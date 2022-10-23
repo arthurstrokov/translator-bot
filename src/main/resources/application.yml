@@ -9,4 +9,4 @@ bot:
   token: ${BOT-TOKEN}
 
 server:
-  port: 5000
+  port: 8080
