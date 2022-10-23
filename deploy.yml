@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: translator-bot
+  name: translator-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: translator-bot
+  template:
+    metadata:
+      labels:
+        run: translator-bot
+        visualize: "true"
+    spec:
+      containers:
+        - name: translator-bot
+          image: arthurstrokov/translator-bot:v0.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: spring.mvc.servlet.path
+              value: /translator-bot
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: translator-bot
+  name: translator-bot
+  annotations:
+    haproxy.org/check: "enabled"
+    haproxy.org/forwarded-for: "enabled"
+    haproxy.org/load-balance: "roundrobin"
+    haproxy.org/path-rewrite: /
+spec:
+  selector:
+    run: translator-bot
+  ports:
+    - name: translator-bot-port
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
