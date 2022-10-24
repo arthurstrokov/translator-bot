@@ -54,7 +54,7 @@ docker {
         ports = [8080]
         images = [
                 'arthurstrokov/translator-bot:latest',
-                'arthurstrokov/translator-bot:v0.0.0'
+                'arthurstrokov/translator-bot:v0.0.2'
         ]
         jvmArgs = ['-Xmx2048m']
     }

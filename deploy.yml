@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: translator-bot
-          image: arthurstrokov/translator-bot:v0.0.0
+          image: arthurstrokov/translator-bot:v0.0.2
           imagePullPolicy: IfNotPresent
           env:
             - name: spring.mvc.servlet.path

@@ -38,8 +38,8 @@ public class TranslatorBot extends TelegramLongPollingBot {
             String text = update.getMessage().getText();
             try {
                 String auth = lingvoApiService.getAuth(globalProperties.getLingvoApiKey());
-                String translated = lingvoApiService.getTranslate("Bearer " + auth, text, globalProperties.getSrcLang(), globalProperties.getDstLang());
-                sendMsg(chatId, translated);
+                String minicard = lingvoApiService.getMinicard("Bearer " + auth, text, globalProperties.getSrcLang(), globalProperties.getDstLang());
+                sendMsg(chatId, minicard);
             } catch (Exception e) {
                 log.info(e.getMessage());
                 sendMsg(chatId, e.getMessage());
