@@ -16,3 +16,8 @@ bot:
 
 server:
   port: 8080
+
+logging:
+  level:
+    root: info
+    org.springframework.cloud.config.client: debug
