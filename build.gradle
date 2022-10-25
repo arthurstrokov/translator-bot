@@ -36,6 +36,8 @@ dependencies {
     implementation 'org.telegram:telegrambots:6.1.0'
 
     implementation 'com.google.guava:guava:31.1-jre'
+
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
 }
 
 dependencyManagement {
@@ -54,7 +56,7 @@ docker {
         ports = [8080]
         images = [
                 'arthurstrokov/translator-bot:latest',
-                'arthurstrokov/translator-bot:v0.0.2'
+                'arthurstrokov/translator-bot:v0.0.0'
         ]
         jvmArgs = ['-Xmx2048m']
     }
