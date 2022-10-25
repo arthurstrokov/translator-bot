@@ -18,11 +18,21 @@ spec:
     spec:
       containers:
         - name: translator-bot
-          image: arthurstrokov/translator-bot:v0.0.2
+          image: arthurstrokov/translator-bot:v0.0.0
           imagePullPolicy: IfNotPresent
           env:
             - name: spring.mvc.servlet.path
               value: /translator-bot
+            - name: API-KEY
+              valueFrom:
+                secretKeyRef:
+                  name: translator-bot-secret
+                  key: API-KEY
+            - name: BOT-TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: translator-bot-secret
+                  key: BOT-TOKEN
           ports:
             - containerPort: 8080
 ---
