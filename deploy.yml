@@ -33,6 +33,12 @@ spec:
                 secretKeyRef:
                   name: translator-bot-secret
                   key: BOT-TOKEN
+            - name: SERVER-PORT
+              value: "8080"
+            - name: EUREKA-DEFAULT-ZONE
+              value: "http://192.168.59.101:30001/eureka"
+            - name: EUREKA-INSTANCE-HOSTNAME
+              value: translator-bot
           ports:
             - containerPort: 8080
 ---
