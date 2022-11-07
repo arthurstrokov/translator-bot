@@ -4,21 +4,21 @@ import com.gmail.arthurstrokov.translatorbot.bot.TranslatorBot;
 import com.gmail.arthurstrokov.translatorbot.configuration.GlobalProperties;
 import com.gmail.arthurstrokov.translatorbot.service.LingvoApiService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-@Slf4j
+@EnableCaching
+@EnableFeignClients
+@EnableDiscoveryClient
 @RequiredArgsConstructor
 @SpringBootApplication
-@EnableFeignClients
-@EnableCaching
 public class TranslatorBotApplication {
 
     private final GlobalProperties globalProperties;
