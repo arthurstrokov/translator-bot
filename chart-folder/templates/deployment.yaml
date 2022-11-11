@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: {{ .Values.application.name }}
+  name: {{ .Values.application.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}
+        visualize: "true"
+    spec:
+      containers:
+        - name: {{ .Values.application.name }}
+          image: {{ .Values.container.image }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: spring.mvc.servlet.path
+              value: /translator-bot
+            - name: API-KEY
+              valueFrom:
+                secretKeyRef:
+                  name: translator-bot-secret
+                  key: API-KEY
+            - name: BOT-TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: translator-bot-secret
+                  key: BOT-TOKEN
+          envFrom:
+            - configMapRef:
+                name: translator-bot-config
+          ports:
+            - containerPort: 8761
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: {{ .Values.application.name }}
+    visualize: "true"
+  name: {{ .Values.application.name }}
+  annotations:
+    haproxy.org/check: "enabled"
+    haproxy.org/forwarded-for: "enabled"
+    haproxy.org/load-balance: "roundrobin"
+    haproxy.org/path-rewrite: /
+spec:
+  selector:
+    app: {{ .Values.application.name }}
+  ports:
+    - name: translator-bot-port
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer

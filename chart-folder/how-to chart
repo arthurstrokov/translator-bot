@@ -1,0 +1,5 @@
+helm install translator-bot chart-folder
+helm uninstall translator-bot chart-folder
+
+helm list
+helm status translator-bot

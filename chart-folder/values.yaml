@@ -1,0 +1,5 @@
+container:
+  image: arthurstrokov/translator-bot:v0.0.0
+replicaCount: 1
+application:
+  name: translator-bot
