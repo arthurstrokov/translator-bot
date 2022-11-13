@@ -3,22 +3,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    run: translator-bot
-  name: translator-bot
+    run: {{ .Values.application.name }}
+  name: {{ .Values.application.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      run: translator-bot
+      app: {{ .Values.application.name }}
   template:
     metadata:
       labels:
-        run: translator-bot
+        app: {{ .Values.application.name }}
         visualize: "true"
     spec:
       containers:
-        - name: translator-bot
-          image: arthurstrokov/translator-bot:v0.0.0
+        - name: {{ .Values.application.name }}
+          image: {{ .Values.container.image }}
           imagePullPolicy: IfNotPresent
           env:
             - name: spring.mvc.servlet.path
@@ -33,21 +33,19 @@ spec:
                 secretKeyRef:
                   name: translator-bot-secret
                   key: BOT-TOKEN
-            - name: SERVER-PORT
-              value: "8080"
-            - name: EUREKA-DEFAULT-ZONE
-              value: "http://192.168.59.101:30001/eureka"
-            - name: EUREKA-INSTANCE-HOSTNAME
-              value: translator-bot
+          envFrom:
+            - configMapRef:
+                name: translator-bot-config
           ports:
-            - containerPort: 8080
+            - containerPort: 8761
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: translator-bot
-  name: translator-bot
+    run: {{ .Values.application.name }}
+    visualize: "true"
+  name: {{ .Values.application.name }}
   annotations:
     haproxy.org/check: "enabled"
     haproxy.org/forwarded-for: "enabled"
@@ -55,7 +53,7 @@ metadata:
     haproxy.org/path-rewrite: /
 spec:
   selector:
-    run: translator-bot
+    app: {{ .Values.application.name }}
   ports:
     - name: translator-bot-port
       port: 8080

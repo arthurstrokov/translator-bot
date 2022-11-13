@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: translator-bot-config
+  namespace: default
+data:
+  SERVER-PORT: "8080"
+  EUREKA-DEFAULT-ZONE: "http://192.168.59.101:30001/eureka"
+  EUREKA-INSTANCE-HOSTNAME: translator-bot
+
+  SRC-LANG: "1033"
+  DST-LANG: "1049"

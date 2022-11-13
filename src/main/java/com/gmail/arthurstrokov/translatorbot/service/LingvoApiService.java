@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-
 public class LingvoApiService {
 
     private final TranslatorBotFeignClient translatorBotFeignClient;
@@ -22,7 +21,11 @@ public class LingvoApiService {
         return translatorBotFeignClient.getAuth(lingvoApiKey, "");
     }
 
-    public String getTranslate(String token, String text, String srcLang, String dstLang) {
-        return translatorBotFeignClient.getTranslate(token, text, srcLang, dstLang);
+    public String getMinicard(String token, String text, String srcLang, String dstLang) {
+        return translatorBotFeignClient.getMinicard(token, text, srcLang, dstLang);
+    }
+
+    public String getTranslation(String token, String text, String srcLang, String dstLang, String isCaseSensitive) {
+        return translatorBotFeignClient.getTranslation(token, text, srcLang, dstLang, isCaseSensitive);
     }
 }
