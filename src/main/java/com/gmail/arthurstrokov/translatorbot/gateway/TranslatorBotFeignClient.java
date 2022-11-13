@@ -1,5 +1,6 @@
 package com.gmail.arthurstrokov.translatorbot.gateway;
 
+import com.gmail.arthurstrokov.translatorbot.configuration.FeignSupportConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  * @email astrokov@clevertec.ru
  * @created 21.10.2022
  */
-@FeignClient(name = "api-client", url = "https://developers.lingvolive.com/api")
+@FeignClient(name = "api-client", url = "https://developers.lingvolive.com/api", configuration = {FeignSupportConfig.class})
 public interface TranslatorBotFeignClient {
 
     @PostMapping("/v1.1/authenticate")

@@ -10,3 +10,19 @@ bot:
 
 server:
   port: 8080
+---
+logging:
+  level:
+    com:
+      gmail:
+        arthurstrokov:
+          translatorbot:
+            gateway:
+              TranslatorBotFeignClient: debug
+---
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.gmail.arthurstrokov.translatorbot.configuration.RetreiveMessageErrorDecoder
+        loggerLevel: basic
