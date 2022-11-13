@@ -37,8 +37,8 @@ public class TranslatorBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
             String text = update.getMessage().getText();
             try {
-                String auth = lingvoApiService.getAuth(globalProperties.getLingvoApiKey());
-                String translated = lingvoApiService.getTranslate("Bearer " + auth, text, globalProperties.getSrcLang(), globalProperties.getDstLang());
+                String token = lingvoApiService.getAuth(globalProperties.getLingvoApiKey());
+                String translated = lingvoApiService.getTranslate("Bearer " + token, text, globalProperties.getSrcLang(), globalProperties.getDstLang());
                 sendMsg(chatId, translated);
             } catch (Exception e) {
                 log.info(e.getMessage());

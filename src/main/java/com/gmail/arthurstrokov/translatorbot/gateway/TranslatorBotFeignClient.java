@@ -13,13 +13,13 @@ public interface TranslatorBotFeignClient {
 
     @PostMapping("/v1.1/authenticate")
     String getAuth(
-            @RequestHeader("Authorization") String headers,
+            @RequestHeader("Authorization") String auth,
             @RequestBody String insteadOfContentLength
     );
 
     @GetMapping("/v1/Minicard")
     String getTranslate(
-            @RequestHeader("Authorization") String headers,
+            @RequestHeader("Authorization") String auth,
             @RequestParam("text") String text,
             @RequestParam("srcLang") String srcLang,
             @RequestParam("dstLang") String dstLang
