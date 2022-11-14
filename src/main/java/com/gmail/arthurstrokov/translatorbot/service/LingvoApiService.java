@@ -22,10 +22,6 @@ public class LingvoApiService {
     }
 
     public String getMinicard(String token, String text, String srcLang, String dstLang) {
-        return translatorBotFeignClient.getMinicard(token, text, srcLang, dstLang);
-    }
-
-    public String getTranslation(String token, String text, String srcLang, String dstLang, String isCaseSensitive) {
-        return translatorBotFeignClient.getTranslation(token, text, srcLang, dstLang, isCaseSensitive);
+        return translatorBotFeignClient.getTranslate(token, text, srcLang, dstLang);
     }
 }
