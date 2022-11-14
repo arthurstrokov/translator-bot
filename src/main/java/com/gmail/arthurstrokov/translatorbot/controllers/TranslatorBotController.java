@@ -28,6 +28,6 @@ public class TranslatorBotController {
                                @RequestParam("text") String text,
                                @RequestParam("srcLang") String srcLang,
                                @RequestParam("dstLang") String dstLang) {
-        return translatorBotFeignClient.getTranslate(token, text, srcLang, dstLang);
+        return translatorBotFeignClient.getMinicard(token, text, srcLang, dstLang);
     }
 }

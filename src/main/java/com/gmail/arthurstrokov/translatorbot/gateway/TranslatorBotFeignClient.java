@@ -19,10 +19,18 @@ public interface TranslatorBotFeignClient {
     );
 
     @GetMapping("/v1/Minicard")
-    String getTranslate(
+    String getMinicard(
             @RequestHeader("Authorization") String auth,
             @RequestParam("text") String text,
             @RequestParam("srcLang") String srcLang,
             @RequestParam("dstLang") String dstLang
     );
+
+    @GetMapping("/v1/Translation")
+    String getTranslation(
+            @RequestHeader("Authorization") String auth,
+            @RequestParam("text") String text,
+            @RequestParam("srcLang") String srcLang,
+            @RequestParam("dstLang") String dstLang,
+            @RequestParam("isCaseSensitive") String isCaseSensitive);
 }
